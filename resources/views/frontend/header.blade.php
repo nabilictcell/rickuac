@@ -176,7 +176,6 @@
             </ul>
           </li> --}}
           <li><a href="{{ route('get_all_gallery') }}">Gallery</a></li>
-          <li><a href="">Test</a></li>
         </ul>
         <ul class="pull-right flip hidden-sm hidden-xs">
           <li>
