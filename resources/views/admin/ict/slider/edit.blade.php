@@ -1,0 +1,94 @@
+@extends('admin.dashboard-ict')
+@section('css')
+<!--  summernote -->
+    <link href="{{asset('admin/assets/summernote/dist/summernote.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets/bootstrap-datepicker/css/datepicker.css')}}" />
+@endsection
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+               Slider Update
+            </header>
+            <div class="panel-body">
+                <form action="{{ route('ict-slider-update',['id'=>$slider->id])}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data" autocomplete="off">
+                    {{ csrf_field() }}
+                          <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-2">Title</label>
+                            <div class="col-md-5">
+                                <input type="text" name="title" class="form-control" id="title" value="{{ $slider->title }}"/>
+                                @if ($errors->has('title'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('title') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('detail') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-2">Detail</label>
+                            <div class="col-md-10">
+                                <textarea name="detail" class="form-control summernote">{!! $slider->detail !!}</textarea>
+                                @if ($errors->has('detail'))
+                                  <span class="help-block">
+                                      <strong>{{ $errors->first('detail') }}</strong>
+                                  </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('link') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-2">Link</label>
+                            <div class="col-md-5">
+                                <input type="text" name="link" class="form-control" id="link" value="{{ $slider->link }}"/>
+                                @if ($errors->has('link'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('link') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('image') ? 'has-error': ''}}">
+                            <label class="control-label col-md-2">Image</label>
+                            <div class="col-md-3">
+                                <span><img src="{{ asset($slider->image) }}" alt="Not Found" width="50" height="40" ></span>
+                                <input type="file" name="image" class="form-control"/>
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image')}}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <a href="admin/slider/" class="btn btn-md btn-info">Go Back</a>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success btn-md pull-right" type="submit">Update</button>
+                            </div>
+                      </div>
+                </form>
+            </div>
+        </section>
+    </div>
+  </div>
+@endsection
+@section('js')
+	@include('admin.notification')
+    <!--summernote-->
+  <script src="{{asset('admin/assets/summernote/dist/summernote.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+  <script src="{{asset('admin/js/advanced-form-components.js')}}"></script>
+  <script type="text/javascript">
+      jQuery(document).ready(function(){
+          $('.summernote').summernote({
+              height: 200,                 // set editor height
+              minHeight: null,             // set minimum height of editor
+              maxHeight: null,             // set maximum height of editor
+              focus: true                 // set focus to editable area after initializing summernote
+          });
+      });
+  </script>
+@endsection

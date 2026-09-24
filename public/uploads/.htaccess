@@ -1,0 +1,22 @@
+# Deny access to all PHP files in this directory and subdirectories
+# This prevents uploaded PHP files from being executed even if they bypass validation
+<FilesMatch "\.(?:php|phtml|php5|php7|phar|phps)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Also deny access to hidden files
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
